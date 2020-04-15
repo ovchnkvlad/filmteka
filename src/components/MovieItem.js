@@ -1,5 +1,9 @@
 import React from "react";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
+import "./MovieItem.css";
+
 class MovieItem extends React.Component {
   constructor() {
     super();
@@ -27,30 +31,40 @@ class MovieItem extends React.Component {
         <div className="card-body">
           <h6 className="card-title">{movie.title}</h6>
           <div className="d-flex justify-content-between align-items-center">
-            <p className="md-0">Rating: {movie.vote_average}</p>
+            <p className="md-0 movie-rating">
+              Rating: <b>{movie.vote_average}</b>
+            </p>
             {this.state.willWatch ? (
-              <button
-                type="button"
-                className="btn btn-success"
+              <span
+                className="like-icon like-icon-active"
                 onClick={() => {
                   this.setState({ willWatch: false });
                   removeMovieFromWillWatch(movie);
                 }}
               >
-                Remove Will watch
-              </button>
+                <FontAwesomeIcon icon={faHeart} />
+              </span>
             ) : (
-              <button
-                type="button"
-                className="btn btn-secondary"
+              <span
+                className="like-icon"
                 onClick={() => {
                   this.setState({ willWatch: true });
                   addMovieToWillWatch(movie);
                 }}
               >
-                Add Will watch
-              </button>
+                <FontAwesomeIcon icon={faHeart} />
+              </span>
             )}
+          </div>
+          <div className="row">
+            <span
+              className="delete-icon"
+              onClick={() => {
+                removeMovie(movie);
+              }}
+            >
+              <FontAwesomeIcon icon={faTrash} />
+            </span>
           </div>
         </div>
       </div>

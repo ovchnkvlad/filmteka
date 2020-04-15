@@ -1,0 +1,34 @@
+.card-title {
+  text-align: center;
+  text-transform: uppercase;
+}
+.card-body button {
+  font-size: 10px;
+}
+.movie-rating {
+  margin-bottom: 0;
+}
+
+.card-img-top {
+  max-height: 170px;
+}
+
+.like-icon svg:hover {
+  cursor: pointer;
+}
+
+.like-icon-active {
+  color: red;
+}
+
+.delete-icon {
+  margin: 0 auto;
+}
+.delete-icon svg:hover {
+  cursor: pointer;
+  color: #666;
+}
+
+.card-body {
+  padding-bottom: 5px;
+}
