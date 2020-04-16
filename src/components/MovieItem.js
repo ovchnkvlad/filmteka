@@ -12,6 +12,7 @@ class MovieItem extends React.Component {
       willWatch: false,
     };
   }
+
   render() {
     const {
       movie,

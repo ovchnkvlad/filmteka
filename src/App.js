@@ -14,6 +14,7 @@ class App extends React.Component {
       moviesWillWatch: [],
       sort_by: "popularity.desc",
     };
+    console.log("constructor");
   }
 
   removeMovie = (movie) => {
@@ -24,8 +25,24 @@ class App extends React.Component {
       movies: updateMovies,
     });
   };
+  updateSortBy = (value) => {
+    this.setState({
+      sort_by: value,
+    });
+  };
 
   componentDidMount() {
+    console.log("componentDidMount");
+    this.getMovies();
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.sort_by !== this.state.sort_by) {
+      console.log("componentDidUpdate");
+      this.getMovies();
+    }
+  }
+
+  getMovies = () => {
     fetch(
       `${API_URL}/discover/movie?api_key=${API_KEY_3}&sort_by=${this.state.sort_by}`
     )
@@ -36,14 +53,7 @@ class App extends React.Component {
         this.setState({
           movies: data.results,
         });
-        console.log(data);
       });
-  }
-
-  updateSortBy = (value) => {
-    this.setState({
-      sort_by: value,
-    });
   };
 
   addMovieToWillWatch = (movie) => {
@@ -55,12 +65,12 @@ class App extends React.Component {
     const updateMovieWillWatch = this.state.moviesWillWatch.filter((item) => {
       return item.id !== movie.id;
     });
-
     this.setState({
       moviesWillWatch: updateMovieWillWatch,
     });
   };
   render() {
+    console.log("render_1", this);
     return (
       <div className="container">
         <div className="row">
@@ -89,7 +99,10 @@ class App extends React.Component {
           </div>
           <div className="col-3 mt-4">
             <p className="like-movie">
-              will watch: <b>{this.state.moviesWillWatch.length}</b>
+              will watch:{" "}
+              <span class="like-count">
+                {this.state.moviesWillWatch.length}
+              </span>
             </p>
           </div>
         </div>
