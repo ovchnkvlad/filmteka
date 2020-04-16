@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { API_URL, API_KEY_3 } from "./utils/api";
 import MovieItem from "./components/MovieItem";
 import MovieTabs from "./components/MovieTabs";
+import WillWatchList from "./components/WillWatchList";
 import "./App.css";
 
 class App extends React.Component {
@@ -100,10 +101,13 @@ class App extends React.Component {
           <div className="col-3 mt-4">
             <p className="like-movie">
               will watch:{" "}
-              <span class="like-count">
+              <span className="like-count">
                 {this.state.moviesWillWatch.length}
               </span>
             </p>
+            {this.state.moviesWillWatch.map((movie) => (
+              <WillWatchList movie={movie} />
+            ))}
           </div>
         </div>
       </div>
